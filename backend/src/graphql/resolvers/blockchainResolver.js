@@ -5,5 +5,9 @@ export const blockchainResolvers = {
     listChains: async (_, { page = 1, perPage = 20 }) => {
       return await blockchainService.listChains(page, perPage);
     },
+
+    listTokens: async (_, args) => {
+      return await blockchainService.listTokens(args);
+    },
   },
 };
