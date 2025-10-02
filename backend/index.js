@@ -2,16 +2,14 @@ import express from "express";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@as-integrations/express4";
 import cors from "cors";
+import { blockchainTypeDefs } from "./src/graphql/typeDefs/blockchain.js";
+import { blockchainResolvers } from "./src/graphql/resolvers/blockchainResolver.js";
 
-const typeDefs = `#graphql
-  type Query {
-    hello: String
-  }
-`;
+const typeDefs = blockchainTypeDefs
 
 const resolvers = {
   Query: {
-    hello: () => "Hello from Notus dApp backend 👋",
+    ...blockchainResolvers.Query,
   },
 };
 
