@@ -21,6 +21,16 @@ async function startServer() {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
+    formatError: (error) => {
+      console.error("GraphQL Error:", error);
+      return {
+        message: error.message,
+        code: error.extensions?.code || "INTERNAL_SERVER_ERROR",
+        ...(config.nodeEnv === "development" && {
+          details: error.extensions,
+        }),
+      };
+    }
   });
 
   await server.start();
