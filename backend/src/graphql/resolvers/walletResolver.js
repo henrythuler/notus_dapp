@@ -14,5 +14,8 @@ export const walletResolvers = {
     getSmartWallet: async (_, args) => {
       return await walletService.getSmartWallet(args);
     },
+    getSmartWalletsByProject: async () => {
+      return await walletService.getSmartWalletsByProject();
+    },
   },
 };

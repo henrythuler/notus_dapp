@@ -50,10 +50,6 @@ export const walletService = {
         salt,
       };
 
-      if (eip7702 === true) {
-        params.eip7702 = true;
-      }
-
       const data = await notusClient.get("/wallets/address", params);
 
       return {
@@ -63,6 +59,21 @@ export const walletService = {
       console.error("Error fetching smart wallet:", error);
       throw new Error(
         error.message || "Failed to fetch smart wallet details"
+      );
+    }
+  },
+
+  async getSmartWalletsByProject() {
+    try {
+      const data = await notusClient.get("/wallets");
+
+      return {
+        wallets: data.wallets || [],
+      };
+    } catch (error) {
+      console.error("Error fetching project wallets:", error);
+      throw new Error(
+        error.message || "Failed to fetch project wallets"
       );
     }
   },

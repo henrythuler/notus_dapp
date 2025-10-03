@@ -23,6 +23,10 @@ export const walletTypeDefs = `#graphql
     wallet: Wallet!
   }
 
+  type WalletsResponse {
+    wallets: [Wallet!]!
+  }
+
   input RegisterWalletInput {
     externallyOwnedAccount: String!
     factory: String!
@@ -42,5 +46,6 @@ export const walletTypeDefs = `#graphql
       salt: String!
       eip7702: Boolean
     ): WalletResponse!
+    getSmartWalletsByProject: WalletsResponse!
   }
 `;
