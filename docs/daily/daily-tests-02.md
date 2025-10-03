@@ -35,7 +35,7 @@
 
 **5. Problemas encontrados**
 
-Encontrei um problema no endpoint `/wallets/address`, onde mesmo passando o parâmetro eip7702 com o valor false, ele considerava o valor do salt e retornava a mensagem: "Salt has no effect on EIP7702 wallets as the address is the EOA itself. Remove salt if you want to use EIP7702.".
+Encontrei um problema no endpoint `/wallets/address`, onde mesmo passando o parâmetro eip7702 com o valor false, ele considerava o valor do salt e retornava a mensagem: "Salt has no effect on EIP7702 wallets as the address is the EOA itself. Remove salt if you want to use EIP7702.". O workaround foi remover o parâmetro eip7702 dos query params, assim o endpoint retornou a resposta esperada.
 
 ---
 
