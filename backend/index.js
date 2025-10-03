@@ -4,12 +4,19 @@ import { expressMiddleware } from "@as-integrations/express4";
 import cors from "cors";
 import { blockchainTypeDefs } from "./src/graphql/typeDefs/blockchain.js";
 import { blockchainResolvers } from "./src/graphql/resolvers/blockchainResolver.js";
+import { walletTypeDefs } from "./src/graphql/typeDefs/wallet.js";
+import { walletResolvers } from "./src/graphql/resolvers/walletResolver.js";
+import { config } from "./src/config/index.js";
 
-const typeDefs = blockchainTypeDefs
+const typeDefs = [blockchainTypeDefs, walletTypeDefs];
 
 const resolvers = {
+  JSON: walletResolvers.JSON,
   Query: {
     ...blockchainResolvers.Query,
+  },
+  Mutation: {
+    ...walletResolvers.Mutation,
   },
 };
 
@@ -40,8 +47,8 @@ async function startServer() {
     expressMiddleware(server)
   );
 
-  app.listen(4000, () => {
-    console.log("Listening at http://localhost:4000/graphql");
+  app.listen(config.port, () => {
+    console.log(`Listening at http://localhost:${config.port}/graphql`);
   });
 }
 
