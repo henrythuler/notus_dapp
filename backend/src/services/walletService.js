@@ -9,13 +9,15 @@ export const walletService = {
     metadata = {},
   }) {
     try {
-      const data = await notusClient.post("/wallets/register", {
+      const body = {
         externallyOwnedAccount,
         factory,
         salt,
         eip7702,
         metadata,
-      });
+      };
+
+      const data = await notusClient.post("/wallets/register", body);
 
       return {
         wallet: data.wallet,
@@ -31,6 +33,36 @@ export const walletService = {
       
       throw new Error(
         error.message || "Failed to register smart wallet"
+      );
+    }
+  },
+
+  async getSmartWallet({
+    externallyOwnedAccount,
+    factory,
+    salt,
+    eip7702 = false,
+  }) {
+    try {
+      const params = {
+        externallyOwnedAccount,
+        factory,
+        salt,
+      };
+
+      if (eip7702 === true) {
+        params.eip7702 = true;
+      }
+
+      const data = await notusClient.get("/wallets/address", params);
+
+      return {
+        wallet: data.wallet,
+      };
+    } catch (error) {
+      console.error("Error fetching smart wallet:", error);
+      throw new Error(
+        error.message || "Failed to fetch smart wallet details"
       );
     }
   },

@@ -9,4 +9,10 @@ export const walletResolvers = {
       return await walletService.registerSmartWallet(input);
     },
   },
+
+  Query: {
+    getSmartWallet: async (_, args) => {
+      return await walletService.getSmartWallet(args);
+    },
+  },
 };

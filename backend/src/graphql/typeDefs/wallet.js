@@ -34,4 +34,13 @@ export const walletTypeDefs = `#graphql
   type Mutation {
     registerSmartWallet(input: RegisterWalletInput!): WalletResponse!
   }
+
+  type Query {
+    getSmartWallet(
+      externallyOwnedAccount: String!
+      factory: String!
+      salt: String!
+      eip7702: Boolean
+    ): WalletResponse!
+  }
 `;

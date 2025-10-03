@@ -14,6 +14,7 @@ const resolvers = {
   JSON: walletResolvers.JSON,
   Query: {
     ...blockchainResolvers.Query,
+    ...walletResolvers.Query,
   },
   Mutation: {
     ...walletResolvers.Mutation,
