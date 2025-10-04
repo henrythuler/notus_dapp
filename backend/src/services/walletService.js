@@ -98,4 +98,34 @@ export const walletService = {
       );
     }
   },
+
+  async getWalletHistory(walletAddress, filters = {}) {
+    try {
+      const params = {};
+
+      if (filters.take) params.take = filters.take;
+      if (filters.lastId) params.lastId = filters.lastId;
+      if (filters.type) params.type = filters.type;
+      if (filters.status) params.status = filters.status;
+      if (filters.userOperationHash) params.userOperationHash = filters.userOperationHash;
+      if (filters.transactionHash) params.transactionHash = filters.transactionHash;
+      if (filters.chains) params.chains = filters.chains;
+      if (filters.createdAtLatest) params.createdAtLatest = filters.createdAtLatest;
+      if (filters.createdAtOldest) params.createdAtOldest = filters.createdAtOldest;
+      if (filters.metadataKey) params.metadataKey = filters.metadataKey;
+      if (filters.metadataValue) params.metadataValue = filters.metadataValue;
+
+      const data = await notusClient.get(`/wallets/${walletAddress}/history`, params);
+
+      return {
+        nextLastId: data.nextLastId || null,
+        transactions: data.transactions || [],
+      };
+    } catch (error) {
+      console.error("Error fetching wallet history:", error);
+      throw new Error(
+        error.message || "Failed to fetch wallet history"
+      );
+    }
+  },
 };

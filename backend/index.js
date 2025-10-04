@@ -9,8 +9,15 @@ import { walletResolvers } from "./src/graphql/resolvers/walletResolver.js";
 import { config } from "./src/config/index.js";
 import { portfolioTypeDefs } from "./src/graphql/typeDefs/portfolio.js";
 import { portfolioResolvers } from "./src/graphql/resolvers/portfolioResolver.js";
+import { transactionTypeDefs } from "./src/graphql/typeDefs/transaction.js";
+import { transactionResolvers } from "./src/graphql/resolvers/transactionResolver.js";
 
-const typeDefs = [blockchainTypeDefs, walletTypeDefs, portfolioTypeDefs];
+const typeDefs = [
+  blockchainTypeDefs,
+  walletTypeDefs,
+  portfolioTypeDefs,
+  transactionTypeDefs,
+];
 
 const resolvers = {
   JSON: walletResolvers.JSON,
@@ -18,6 +25,7 @@ const resolvers = {
     ...blockchainResolvers.Query,
     ...walletResolvers.Query,
     ...portfolioResolvers.Query,
+    ...transactionResolvers.Query,
 
   },
   Mutation: {
