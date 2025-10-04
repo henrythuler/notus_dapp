@@ -15,8 +15,16 @@ export const walletTypeDefs = `#graphql
     implementation: String!
     eip7702: Boolean!
     deployed: [DeploymentStatus!]!
-    salt: Int!
+    salt: String!
     registeredAt: String
+  }
+
+  type Transfer {
+    from: String!,
+    to: String!,
+    value: String!,
+    data: String!,
+    estimateGasCost: String!,
   }
 
   type WalletResponse {
@@ -27,6 +35,10 @@ export const walletTypeDefs = `#graphql
     wallets: [Wallet!]!
   }
 
+  type DepositTransactionResponse {
+    transfer: Transfer!
+  }
+
   input RegisterWalletInput {
     externallyOwnedAccount: String!
     factory: String!
@@ -35,8 +47,16 @@ export const walletTypeDefs = `#graphql
     metadata: JSON
   }
 
+  input DepositTransactionInput {
+    amount: String!
+    chainId: Int!
+    token: String!
+    fromAddress: String!
+  }
+
   type Mutation {
     registerSmartWallet(input: RegisterWalletInput!): WalletResponse!
+    createDepositTransaction(walletAddress: String!, input: DepositTransactionInput!): DepositTransactionResponse!
   }
 
   type Query {

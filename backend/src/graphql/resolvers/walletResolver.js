@@ -8,6 +8,9 @@ export const walletResolvers = {
     registerSmartWallet: async (_, { input }) => {
       return await walletService.registerSmartWallet(input);
     },
+    createDepositTransaction: async (_, { walletAddress, input }) => {
+      return await walletService.createDepositTransaction(walletAddress, input);
+    },
   },
 
   Query: {

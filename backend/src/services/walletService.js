@@ -128,4 +128,26 @@ export const walletService = {
       );
     }
   },
+
+  async createDepositTransaction(walletAddress, { amount, chainId, token, fromAddress }) {
+    try {
+      const body = {
+        amount,
+        chainId,
+        token,
+        fromAddress,
+      };
+
+      const data = await notusClient.post(`/wallets/${walletAddress}/deposit`, body);
+
+      return {
+        transfer: data.transfer,
+      };
+    } catch (error) {
+      console.error("Error creating deposit transaction:", error);
+      throw new Error(
+        error.message || "Failed to create deposit transaction"
+      );
+    }
+  },
 };
