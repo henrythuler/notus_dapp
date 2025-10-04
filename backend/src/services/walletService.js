@@ -50,6 +50,10 @@ export const walletService = {
         salt,
       };
 
+      if (eip7702 === true) {
+        params.eip7702 = true;
+      }
+
       const data = await notusClient.get("/wallets/address", params);
 
       return {

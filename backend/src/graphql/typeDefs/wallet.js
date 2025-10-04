@@ -43,7 +43,7 @@ export const walletTypeDefs = `#graphql
     getSmartWallet(
       externallyOwnedAccount: String!
       factory: String!
-      salt: String!
+      salt: String
       eip7702: Boolean
     ): WalletResponse!
     getSmartWalletsByProject: WalletsResponse!
