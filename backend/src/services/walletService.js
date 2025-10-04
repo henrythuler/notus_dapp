@@ -150,4 +150,21 @@ export const walletService = {
       );
     }
   },
+
+    async updateWalletMetadata(walletAddress, { metadata }) {
+    try {
+      const body = { metadata };
+
+      const data = await notusClient.patch(`/wallets/${walletAddress}/metadata`, body);
+
+      return {
+        wallet: data.wallet,
+      };
+    } catch (error) {
+      console.error("Error updating wallet metadata:", error);
+      throw new Error(
+        error.message || "Failed to update wallet metadata"
+      );
+    }
+  },
 };

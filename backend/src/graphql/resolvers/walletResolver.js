@@ -11,6 +11,9 @@ export const walletResolvers = {
     createDepositTransaction: async (_, { walletAddress, input }) => {
       return await walletService.createDepositTransaction(walletAddress, input);
     },
+    updateWalletMetadata: async (_, { walletAddress, input }) => {
+      return await walletService.updateWalletMetadata(walletAddress, input);
+    },
   },
 
   Query: {

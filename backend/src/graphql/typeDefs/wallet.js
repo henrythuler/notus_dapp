@@ -54,9 +54,14 @@ export const walletTypeDefs = `#graphql
     fromAddress: String!
   }
 
+  input WalletMetadataInput {
+    metadata: JSON!
+  }
+
   type Mutation {
     registerSmartWallet(input: RegisterWalletInput!): WalletResponse!
     createDepositTransaction(walletAddress: String!, input: DepositTransactionInput!): DepositTransactionResponse!
+    updateWalletMetadata(walletAddress: String!, input: WalletMetadataInput!): WalletResponse!
   }
 
   type Query {
