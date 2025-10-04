@@ -81,4 +81,21 @@ export const walletService = {
       );
     }
   },
+
+  async getWalletPortfolio(walletAddress) {
+    try {
+      const data = await notusClient.get(`/wallets/${walletAddress}/portfolio`);
+
+      return {
+        tokens: data.tokens || [],
+        nfts: data.nfts || [],
+        portfolio: data.portfolio || [],
+      };
+    } catch (error) {
+      console.error("Error fetching wallet portfolio:", error);
+      throw new Error(
+        error.message || "Failed to fetch wallet portfolio"
+      );
+    }
+  },
 };
