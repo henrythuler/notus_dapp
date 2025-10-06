@@ -5,5 +5,8 @@ export const kycResolvers = {
     createKycSession: async (_, { input }) => {
       return await kycService.createKycSession(input);
     },
+    processKycSession: async (_, { sessionId }) => {
+      return await kycService.processKycSession(sessionId);
+    },
   },
 };

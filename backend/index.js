@@ -29,6 +29,7 @@ const resolvers = {
     ...walletResolvers.Query,
     ...portfolioResolvers.Query,
     ...transactionResolvers.Query,
+    ...kycResolvers.Query,
   },
   Mutation: {
     ...walletResolvers.Mutation,

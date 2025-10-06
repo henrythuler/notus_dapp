@@ -53,4 +53,14 @@ export const kycService = {
       throw new Error(error.message || "Failed to create KYC session");
     }
   },
+
+  async processKycSession(sessionId) {
+    try {
+      await notusClient.post(`/kyc/individual-verification-sessions/standard/${sessionId}/process`);
+      return true;
+    } catch (error) {
+      console.error("Error processing KYC session:", error);
+      throw new Error(error.message || "Failed to process KYC session");
+    }
+  },
 };

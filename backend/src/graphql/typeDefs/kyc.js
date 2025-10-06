@@ -57,5 +57,6 @@ export const kycTypeDefs = `#graphql
 
   type Mutation {
     createKycSession(input: CreateKycSessionInput!): KycSessionResponse!
+    processKycSession(sessionId: String!): Boolean!
   }
 `;
