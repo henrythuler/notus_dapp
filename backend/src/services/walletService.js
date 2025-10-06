@@ -151,7 +151,7 @@ export const walletService = {
     }
   },
 
-    async updateWalletMetadata(walletAddress, { metadata }) {
+  async updateWalletMetadata(walletAddress, { metadata }) {
     try {
       const body = { metadata };
 

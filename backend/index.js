@@ -30,6 +30,7 @@ const resolvers = {
   },
   Mutation: {
     ...walletResolvers.Mutation,
+    ...transactionResolvers.Mutation,
   },
 };
 

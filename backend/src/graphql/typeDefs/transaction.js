@@ -60,6 +60,14 @@ export const transactionTypeDefs = `#graphql
     transactions: [Transaction!]!
   }
 
+  type TransactionResponse {
+    transaction: Transaction!
+  }
+
+  input UpdateTransactionMetadataInput {
+    metadata: JSON!
+  }
+
   extend type Query {
     getWalletHistory(
       walletAddress: String!
@@ -75,5 +83,12 @@ export const transactionTypeDefs = `#graphql
       metadataKey: String
       metadataValue: String
     ): TransactionHistoryResponse!
+  }
+
+  extend type Mutation {
+    updateTransactionMetadata(
+      transactionId: String!
+      input: UpdateTransactionMetadataInput!
+    ): TransactionResponse!
   }
 `;
