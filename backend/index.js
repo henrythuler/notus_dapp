@@ -11,12 +11,15 @@ import { portfolioTypeDefs } from "./src/graphql/typeDefs/portfolio.js";
 import { portfolioResolvers } from "./src/graphql/resolvers/portfolioResolver.js";
 import { transactionTypeDefs } from "./src/graphql/typeDefs/transaction.js";
 import { transactionResolvers } from "./src/graphql/resolvers/transactionResolver.js";
+import { kycTypeDefs } from "./src/graphql/typeDefs/kyc.js";
+import { kycResolvers } from "./src/graphql/resolvers/kycResolver.js";
 
 const typeDefs = [
   blockchainTypeDefs,
   walletTypeDefs,
   portfolioTypeDefs,
   transactionTypeDefs,
+  kycTypeDefs,
 ];
 
 const resolvers = {
@@ -26,11 +29,11 @@ const resolvers = {
     ...walletResolvers.Query,
     ...portfolioResolvers.Query,
     ...transactionResolvers.Query,
-
   },
   Mutation: {
     ...walletResolvers.Mutation,
     ...transactionResolvers.Mutation,
+    ...kycResolvers.Mutation,
   },
 };
 
