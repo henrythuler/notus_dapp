@@ -26,4 +26,14 @@ export const fiatService = {
       throw new Error(error.message || "Failed to create fiat deposit quote");
     }
   },
+
+  async createFiatDepositOrder({ quoteId }) {
+    try {
+      const data = await notusClient.post("/fiat/deposit", { quoteId });
+      return { depositOrder: data.depositOrder };
+    } catch (error) {
+      console.error("Error creating fiat deposit order:", error);
+      throw new Error(error.message || "Failed to create fiat deposit order");
+    }
+  },
 };
