@@ -9,4 +9,10 @@ export const kycResolvers = {
       return await kycService.processKycSession(sessionId);
     },
   },
+
+  Query: {
+    getKycSession: async (_, { sessionId }) => {
+      return await kycService.getKycSession(sessionId);
+    },
+  },
 };

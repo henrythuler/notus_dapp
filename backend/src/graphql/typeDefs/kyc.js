@@ -59,4 +59,8 @@ export const kycTypeDefs = `#graphql
     createKycSession(input: CreateKycSessionInput!): KycSessionResponse!
     processKycSession(sessionId: String!): Boolean!
   }
+
+  type Query {
+    getKycSession(sessionId: String!): KycSessionResponse!
+  }
 `;
