@@ -71,7 +71,44 @@ export const cryptoTypeDefs = `#graphql
     metadata: JSON
   }
 
+  type Transfer {
+    metadata: JSON
+    userOperationHash: String
+    quoteId: String
+    revertReason: RevertReason
+    authorization: Authorization
+    walletAddress: String
+    token: String
+    amountToSend: String
+    amountToSendUSD: String
+    amountToBeReceived: String
+    amountToBeReceivedUSD: String
+    chain: Int
+    estimatedExecutionTime: String
+    estimatedGasFees: EstimatedGasFees
+    estimatedCollectedFee: EstimatedCollectedFee
+    toAddress: String
+    expiresAt: String
+  }
+
+  type TransferResponse {
+    transfer: Transfer!
+  }
+
+  input TransferInput {
+    amount: String!
+    chainId: Int!
+    gasFeePaymentMethod: String!
+    payGasFeeToken: String!
+    token: String!
+    walletAddress: String!
+    toAddress: String!
+    transactionFeePercent: Float
+    metadata: JSON
+  }
+
   type Mutation {
     createSwap(input: SwapInput!): SwapQuotesResponse!
+    createTransfer(input: TransferInput!): TransferResponse!
   }
 `;

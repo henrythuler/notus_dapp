@@ -10,4 +10,14 @@ export const cryptoService = {
       throw new Error(error.message || "Failed to create crypto swap");
     }
   },
+
+  async createTransfer(input) {
+    try {
+      const data = await notusClient.post("/crypto/transfer", input);
+      return { transfer: data.transfer };
+    } catch (error) {
+      console.error("Error creating crypto transfer:", error);
+      throw new Error(error.message || "Failed to create crypto transfer");
+    }
+  },
 };

@@ -5,5 +5,8 @@ export const cryptoResolvers = {
     createSwap: async (_, { input }) => {
       return await cryptoService.createSwap(input);
     },
+    createTransfer: async (_, { input }) => {
+      return await cryptoService.createTransfer(input);
+    },
   },
 };
