@@ -15,6 +15,8 @@ import { kycTypeDefs } from "./src/graphql/typeDefs/kyc.js";
 import { kycResolvers } from "./src/graphql/resolvers/kycResolver.js";
 import { fiatTypeDefs } from "./src/graphql/typeDefs/fiat.js";
 import { fiatResolvers } from "./src/graphql/resolvers/fiatResolver.js";
+import { cryptoTypeDefs } from "./src/graphql/typeDefs/crypto.js";
+import { cryptoResolvers } from "./src/graphql/resolvers/cryptoResolver.js";
 
 const typeDefs = [
   blockchainTypeDefs,
@@ -23,6 +25,7 @@ const typeDefs = [
   transactionTypeDefs,
   kycTypeDefs,
   fiatTypeDefs,
+  cryptoTypeDefs
 ];
 
 const resolvers = {
@@ -39,6 +42,7 @@ const resolvers = {
     ...transactionResolvers.Mutation,
     ...kycResolvers.Mutation,
     ...fiatResolvers.Mutation,
+    ...cryptoResolvers.Mutation,
   },
 };
 
