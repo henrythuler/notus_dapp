@@ -1,7 +1,10 @@
 import { notusClient } from "./notusClient.js";
+import axios from "axios";
+import fs from "fs";
+import FormData from "form-data";
 
 export const kycService = {
-  async createKycSession({ firstName, lastName, birthDate, documentId, documentCategory, documentCountry, livenessRequired, email, address, city, state, postalCode, nationality }) {
+  async createKycSession({ firstName, lastName, birthDate, documentId, documentCategory, documentCountry, livenessRequired, email, address, city, state, postalCode, nationality, backFilePath, frontFilePath }) {
     try {
       const body = {
         firstName,
@@ -20,6 +23,11 @@ export const kycService = {
       };
 
       const data = await notusClient.post("/kyc/individual-verification-sessions/standard", body);
+
+      await this.uploadDocument(data.frontDocumentUpload, frontFilePath);
+      if (backFilePath) {
+        await this.uploadDocument(data.backDocumentUpload, backFilePath);
+      }
 
       return {
         session: data.session,
@@ -73,4 +81,20 @@ export const kycService = {
       throw new Error(error.message || "Failed to fetch KYC session");
     }
   },
+
+  async uploadDocument(documentUpload, filePath) {
+    const formData = new FormData();
+    for (const [key, value] of Object.entries(documentUpload.fields)) {
+      formData.append(key, value);
+    }
+    formData.append("file", fs.createReadStream(filePath));
+
+    const res = await axios.post(documentUpload.url, formData, {
+      headers: formData.getHeaders(),
+    });
+
+    if (res.status !== 204 && res.status !== 200) {
+      throw new Error("Document upload failed");
+    }
+  }
 };

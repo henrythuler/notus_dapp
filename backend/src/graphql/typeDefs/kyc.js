@@ -53,6 +53,8 @@ export const kycTypeDefs = `#graphql
     state: String,
     postalCode: String,
     natinality: String,
+    frontFilePath: String!,
+    backFilePath: String
   }
 
   type Mutation {
