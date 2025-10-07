@@ -8,5 +8,11 @@ export const fiatResolvers = {
     createFiatDepositOrder: async (_, { input }) => {
       return await fiatService.createFiatDepositOrder(input);
     },
+    createFiatWithdrawQuote: async (_, { input }) => {
+      return await fiatService.createFiatWithdrawQuote(input);
+    },
+    createFiatWithdrawOrder: async (_, { input }) => {
+      return await fiatService.createFiatWithdrawOrder(input);
+    },
   },
 };

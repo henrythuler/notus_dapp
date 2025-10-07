@@ -26,6 +26,37 @@ export const fiatTypeDefs = `#graphql
     depositOrder: DepositOrder!
   }
 
+  type WithdrawQuote {
+    quoteId: String!
+    cryptoCurrencyToSend: String!
+    fiatCurrencyToReceive: String!
+    amountToSendInCryptoCurrency: String!
+    amountToReceiveInFiatCurrency: String!
+    transactionFeeInCryptoCurrency: String!
+    estimatedGasFeeInCryptoCurrency: String!
+    expiresAt: String!
+  }
+
+  type WithdrawQuoteResponse {
+    withdrawQuote: WithdrawQuote!
+  }
+
+  type WithdrawOrder {
+    expiresAt: String!
+    userOperationHash: String!
+    userOpHash: String
+    authorization: JSON
+    orderId: String!
+    amountToSendInCryptoCurrency: String!
+    amountToReceiveInFiatCurrency: String!
+    transactionFeeAmountInCryptoCurrency: String!
+    estimatedGasFeeAmountInCryptoCurrency: String!
+  }
+
+  type WithdrawOrderResponse {
+    withdrawOrder: WithdrawOrder!
+  }
+
   input CreateDepositQuoteInput {
     paymentMethodToSend: String!
     receiveCryptoCurrency: String!
@@ -39,8 +70,28 @@ export const fiatTypeDefs = `#graphql
     quoteId: String!
   }
 
+  input PaymentMethodToReceiveDetailsInput {
+    type: String!
+    pixKey: String!
+  }
+
+  input CreateWithdrawQuoteInput {
+    individualId: String!
+    amountToSendInCryptoCurrency: Float!
+    cryptoCurrencyToSend: String!
+    paymentMethodToReceiveDetails: PaymentMethodToReceiveDetailsInput!
+    chainId: Int!
+  }
+
+  input CreateWithdrawOrderInput {
+    quoteId: String!
+    walletAddress: String!
+  }
+
   type Mutation {
     createFiatDepositQuote(input: CreateDepositQuoteInput!): DepositQuoteResponse!
     createFiatDepositOrder(input: CreateDepositOrderInput!): DepositOrderResponse!
+    createFiatWithdrawQuote(input: CreateWithdrawQuoteInput!): WithdrawQuoteResponse!
+    createFiatWithdrawOrder(input: CreateWithdrawOrderInput!): WithdrawOrderResponse!
   }
 `;

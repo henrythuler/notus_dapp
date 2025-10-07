@@ -36,4 +36,40 @@ export const fiatService = {
       throw new Error(error.message || "Failed to create fiat deposit order");
     }
   },
+
+  async createFiatWithdrawQuote({
+    individualId,
+    amountToSendInCryptoCurrency,
+    cryptoCurrencyToSend,
+    paymentMethodToReceiveDetails,
+    chainId,
+  }) {
+    try {
+      const body = {
+        individualId,
+        amountToSendInCryptoCurrency,
+        cryptoCurrencyToSend,
+        paymentMethodToReceiveDetails,
+        chainId,
+      };
+
+      const data = await notusClient.post("/fiat/withdraw/quote", body);
+      return { withdrawQuote: data.withdrawQuote };
+    } catch (error) {
+      console.error("Error creating fiat withdraw quote:", error);
+      throw new Error(error.message || "Failed to create fiat withdraw quote");
+    }
+  },
+  
+  async createFiatWithdrawOrder({ quoteId, walletAddress }) {
+    try {
+      const body = { quoteId, walletAddress };
+      const data = await notusClient.post("/fiat/withdraw", body);
+
+      return { withdrawOrder: data.withdrawOrder };
+    } catch (error) {
+      console.error("Error creating fiat withdraw order:", error);
+      throw new Error(error.message || "Failed to create fiat withdraw order");
+    }
+  },
 };
