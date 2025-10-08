@@ -31,7 +31,7 @@
 
 **4. Você conseguiu atingir o objetivo da sessão?**
 
-[X] SIM
+[X] Não, pois ainda não consegui um usuário com KYC válido.
 
 ---
 
