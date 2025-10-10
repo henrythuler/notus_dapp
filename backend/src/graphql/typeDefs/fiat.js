@@ -60,7 +60,7 @@ export const fiatTypeDefs = `#graphql
   input CreateDepositQuoteInput {
     paymentMethodToSend: String!
     receiveCryptoCurrency: String!
-    amountToSendInFiatCurrency: Float!
+    amountToSendInFiatCurrency: String!
     individualId: String!
     walletAddress: String!
     chainId: Int!
@@ -77,7 +77,7 @@ export const fiatTypeDefs = `#graphql
 
   input CreateWithdrawQuoteInput {
     individualId: String!
-    amountToSendInCryptoCurrency: Float!
+    amountToSendInCryptoCurrency: String!
     cryptoCurrencyToSend: String!
     paymentMethodToReceiveDetails: PaymentMethodToReceiveDetailsInput!
     chainId: Int!

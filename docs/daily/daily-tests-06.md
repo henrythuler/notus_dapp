@@ -1,4 +1,4 @@
-# Daily 005: Crypto Operations (Swap & Transfer)
+# Daily 006: Crypto Operations (Swap & Transfer)
 
 **Data:** 08/10/2025  
 ---

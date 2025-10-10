@@ -24,37 +24,15 @@ export const kycService = {
 
       const data = await notusClient.post("/kyc/individual-verification-sessions/standard", body);
 
-      await this.uploadDocument(data.frontDocumentUpload, frontFilePath);
+      await this.uploadDocumentToS3(data.frontDocumentUpload, frontFilePath);
       if (backFilePath) {
-        await this.uploadDocument(data.backDocumentUpload, backFilePath);
+        await this.uploadDocumentToS3(data.backDocumentUpload, backFilePath);
       }
+
+      await this.processKycSession(data.session.id);
 
       return {
         session: data.session,
-        backDocumentUpload: {
-          url: data.backDocumentUpload.url,
-          fields: {
-            X_Amz_Algorithm: data.backDocumentUpload.fields["X-Amz-Algorithm"],
-            X_Amz_Credential: data.backDocumentUpload.fields["X-Amz-Credential"],
-            X_Amz_Date: data.backDocumentUpload.fields["X-Amz-Date"],
-            Policy: data.backDocumentUpload.fields["Policy"],
-            X_Amz_Signature: data.backDocumentUpload.fields["X-Amz-Signature"],
-            bucket: data.backDocumentUpload.fields["bucket"],
-            key: data.backDocumentUpload.fields["key"],
-          }
-        },
-        frontDocumentUpload: {
-          url: data.frontDocumentUpload.url,
-          fields: {
-            X_Amz_Algorithm: data.frontDocumentUpload.fields["X-Amz-Algorithm"],
-            X_Amz_Credential: data.frontDocumentUpload.fields["X-Amz-Credential"],
-            X_Amz_Date: data.frontDocumentUpload.fields["X-Amz-Date"],
-            Policy: data.frontDocumentUpload.fields["Policy"],
-            X_Amz_Signature: data.frontDocumentUpload.fields["X-Amz-Signature"],
-            bucket: data.frontDocumentUpload.fields["bucket"],
-            key: data.frontDocumentUpload.fields["key"],
-          }
-        },
       };
     } catch (error) {
       console.error("Error creating KYC session:", error);
@@ -82,19 +60,32 @@ export const kycService = {
     }
   },
 
-  async uploadDocument(documentUpload, filePath) {
-    const formData = new FormData();
-    for (const [key, value] of Object.entries(documentUpload.fields)) {
-      formData.append(key, value);
-    }
-    formData.append("file", fs.createReadStream(filePath));
+  /**
+   * @param {Object} uploadData - Object containing url and S3 fields
+   * @param {string} filePath - File to be sent path (ex: "./docs/front.jpg")
+  */
+  async uploadDocumentToS3(uploadData, filePath) {
+    const { url, fields } = uploadData;
 
-    const res = await axios.post(documentUpload.url, formData, {
-      headers: formData.getHeaders(),
+    const formData = new FormData();
+
+    Object.entries(fields).forEach(([key, value]) => {
+      formData.append(key, value);
     });
 
-    if (res.status !== 204 && res.status !== 200) {
-      throw new Error("Document upload failed");
+    formData.append("file", fs.createReadStream(filePath));
+
+    try {
+      const response = await axios.post(url, formData, {
+        headers: formData.getHeaders(),
+      });
+
+      console.log(`Document ${filePath} successfully uploaded!`);
+
+      return response.status;
+    } catch (error) {
+      console.error("Failed to send document: " + error.response?.data || error.message);
+      throw error;
     }
   }
 };
