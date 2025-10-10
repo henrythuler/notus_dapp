@@ -1,12 +1,11 @@
 {
   "name": "notus_dapp_backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend for Notus DApp",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "start": "node src/index.js",
-    "test": "jest"
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -16,15 +15,13 @@
     "@apollo/server": "^5.0.0",
     "@as-integrations/express4": "^1.1.2",
     "axios": "^1.12.2",
-    "body-parser": "^2.2.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^4.21.2",
-    "graphql": "^16.11.0"
+    "graphql": "^16.11.0",
+    "graphql-type-json": "^0.3.2"
   },
   "devDependencies": {
-    "jest": "^30.2.0",
-    "nodemon": "^3.1.10",
-    "supertest": "^7.1.4"
+    "nodemon": "^3.1.10"
   }
 }
