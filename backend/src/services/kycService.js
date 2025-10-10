@@ -35,7 +35,6 @@ export const kycService = {
         session: data.session,
       };
     } catch (error) {
-      console.error("Error creating KYC session:", error);
       throw new Error(error.message || "Failed to create KYC session");
     }
   },
@@ -45,7 +44,6 @@ export const kycService = {
       await notusClient.post(`/kyc/individual-verification-sessions/standard/${sessionId}/process`);
       return true;
     } catch (error) {
-      console.error("Error processing KYC session:", error);
       throw new Error(error.message || "Failed to process KYC session");
     }
   },
@@ -55,7 +53,6 @@ export const kycService = {
       const data = await notusClient.get(`/kyc/individual-verification-sessions/standard/${sessionId}`);
       return data;
     } catch (error) {
-      console.error("Error fetching KYC session:", error);
       throw new Error(error.message || "Failed to fetch KYC session");
     }
   },
@@ -84,7 +81,6 @@ export const kycService = {
 
       return response.status;
     } catch (error) {
-      console.error("Failed to send document: " + error.response?.data || error.message);
       throw error;
     }
   }

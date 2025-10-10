@@ -22,7 +22,6 @@ export const fiatService = {
       const data = await notusClient.post("/fiat/deposit/quote", body);
       return { depositQuote: data.depositQuote };
     } catch (error) {
-      console.error("Error creating fiat deposit quote:", error);
       throw new Error(error.message || "Failed to create fiat deposit quote");
     }
   },
@@ -32,7 +31,6 @@ export const fiatService = {
       const data = await notusClient.post("/fiat/deposit", { quoteId });
       return { depositOrder: data.depositOrder };
     } catch (error) {
-      console.error("Error creating fiat deposit order:", error);
       throw new Error(error.message || "Failed to create fiat deposit order");
     }
   },
@@ -56,7 +54,6 @@ export const fiatService = {
       const data = await notusClient.post("/fiat/withdraw/quote", body);
       return { withdrawQuote: data.withdrawQuote };
     } catch (error) {
-      console.error("Error creating fiat withdraw quote:", error);
       throw new Error(error.message || "Failed to create fiat withdraw quote");
     }
   },
@@ -68,7 +65,6 @@ export const fiatService = {
 
       return { withdrawOrder: data.withdrawOrder };
     } catch (error) {
-      console.error("Error creating fiat withdraw order:", error);
       throw new Error(error.message || "Failed to create fiat withdraw order");
     }
   },

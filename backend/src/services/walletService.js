@@ -23,8 +23,6 @@ export const walletService = {
         wallet: data.wallet,
       };
     } catch (error) {
-      console.error("Error registering smart wallet:", error);
-      
       if (error.details?.id === "WALLET_ALREADY_REGISTERED") {
         throw new Error(
           error.details.message || "This wallet is already registered with this project"
@@ -60,7 +58,6 @@ export const walletService = {
         wallet: data.wallet,
       };
     } catch (error) {
-      console.error("Error fetching smart wallet:", error);
       throw new Error(
         error.message || "Failed to fetch smart wallet details"
       );
@@ -75,7 +72,6 @@ export const walletService = {
         wallets: data.wallets || [],
       };
     } catch (error) {
-      console.error("Error fetching project wallets:", error);
       throw new Error(
         error.message || "Failed to fetch project wallets"
       );
@@ -92,7 +88,6 @@ export const walletService = {
         portfolio: data.portfolio || [],
       };
     } catch (error) {
-      console.error("Error fetching wallet portfolio:", error);
       throw new Error(
         error.message || "Failed to fetch wallet portfolio"
       );
@@ -122,7 +117,6 @@ export const walletService = {
         transactions: data.transactions || [],
       };
     } catch (error) {
-      console.error("Error fetching wallet history:", error);
       throw new Error(
         error.message || "Failed to fetch wallet history"
       );
@@ -144,7 +138,6 @@ export const walletService = {
         transfer: data.transfer,
       };
     } catch (error) {
-      console.error("Error creating deposit transaction:", error);
       throw new Error(
         error.message || "Failed to create deposit transaction"
       );
@@ -161,7 +154,6 @@ export const walletService = {
         wallet: data.wallet,
       };
     } catch (error) {
-      console.error("Error updating wallet metadata:", error);
       throw new Error(
         error.message || "Failed to update wallet metadata"
       );

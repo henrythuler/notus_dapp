@@ -14,7 +14,6 @@ export const transactionService = {
         transaction: data.transaction,
       };
     } catch (error) {
-      console.error("Error updating transaction metadata:", error);
       throw new Error(
         error.message || "Failed to update transaction metadata"
       );

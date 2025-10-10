@@ -12,7 +12,6 @@ export const blockchainService = {
         chains: data.chains || [],
       };
     } catch (error) {
-      console.error("Error fetching chains:", error);
       throw new Error(
         error.message || "Failed to fetch blockchain chains from Notus API"
       );
@@ -50,7 +49,6 @@ export const blockchainService = {
         total: data.total || 0,
       };
     } catch (error) {
-      console.error("Error fetching tokens:", error);
       throw new Error(
         error.message || "Failed to fetch tokens from Notus API"
       );

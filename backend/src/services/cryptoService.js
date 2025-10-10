@@ -6,7 +6,6 @@ export const cryptoService = {
       const data = await notusClient.post("/crypto/swap", input);
       return { quotes: data.quotes || [] };
     } catch (error) {
-      console.error("Error creating crypto swap:", error);
       throw new Error(error.message || "Failed to create crypto swap");
     }
   },
@@ -16,7 +15,6 @@ export const cryptoService = {
       const data = await notusClient.post("/crypto/transfer", input);
       return { transfer: data.transfer };
     } catch (error) {
-      console.error("Error creating crypto transfer:", error);
       throw new Error(error.message || "Failed to create crypto transfer");
     }
   },
