@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "start": "node src/index.js",
-    "test": "jest"
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -23,8 +22,6 @@
     "graphql-type-json": "^0.3.2"
   },
   "devDependencies": {
-    "jest": "^30.2.0",
-    "nodemon": "^3.1.10",
-    "supertest": "^7.1.4"
+    "nodemon": "^3.1.10"
   }
 }
